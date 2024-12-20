@@ -2,38 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAddress } from "../../services/apiGeocoding";
 
 function getPosition() {
-  //   return new Promise(function (resolve, reject) {
-  //     navigator.geolocation.getCurrentPosition(resolve, reject);
-  //   });
-
   return new Promise(function (resolve, reject) {
-    // First check if location services are enabled
-    if (!navigator.geolocation) {
-      reject(
-        new Error("Please enable location services in your device settings"),
-      );
-      return;
-    }
+    // navigator.geolocation.getCurrentPosition(resolve, reject);
 
-    const options = {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
       enableHighAccuracy: true,
-      timeout: 7000,
+      timeout: 5000,
       maximumAge: 0,
-    };
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => resolve(position),
-      (error) => {
-        if (error.code === 2) {
-          reject(
-            new Error("Please turn on GPS/Location services and try again"),
-          );
-        } else {
-          reject(new Error("Please enable location access in your settings"));
-        }
-      },
-      options,
-    );
+    });
   });
 }
 
@@ -86,7 +62,7 @@ const userSlice = createSlice({
       .addCase(fetchAddress.rejected, (state, action) => {
         state.status = "error";
         state.error =
-          "There was a problem getting your address. Make sure to fill this field!";
+          "Location access denied, Please enable GPS or type your address manually to continue";
       }),
 });
 

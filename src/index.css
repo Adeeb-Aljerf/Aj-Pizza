@@ -19,7 +19,18 @@
     background-size: 20% 50%;
     animation: loading 1s infinite linear;
   }
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
 
+  .animate-shimmer {
+    animation: shimmer 1.5s infinite linear;
+  }
   @keyframes loading {
     20% {
       background-position:

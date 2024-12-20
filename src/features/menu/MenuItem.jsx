@@ -1,12 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../ui/Button';
-import DeleteItem from '../cart/DeleteItem';
-import UpdateItemQuantity from '../cart/UpdateItemQuantity';
-import { formatCurrency } from '../../utils/helpers';
-import { addItem, getCurrentQuantityById } from '../cart/cartSlice';
+import { useDispatch, useSelector } from "react-redux";
+import Button from "../../ui/Button";
+import DeleteItem from "../cart/DeleteItem";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity";
+import { formatCurrency } from "../../utils/helpers";
+import { addItem, getCurrentQuantityById } from "../cart/cartSlice";
+import { useState } from "react";
 
 function MenuItem({ pizza }) {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
@@ -26,15 +28,30 @@ function MenuItem({ pizza }) {
 
   return (
     <li className="flex gap-4 py-2">
-      <img
-        src={imageUrl}
-        alt={name}
-        className={`h-24 ${soldOut ? 'opacity-70 grayscale' : ''}`}
-      />
+      <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
+        {/* Shimmer loading effect */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-300
+            ${isLoading ? "opacity-100" : "opacity-0"}`}
+        >
+          <div className="h-full w-full animate-shimmer bg-gradient-to-r from-stone-200 via-stone-100 to-stone-200 bg-[length:400%_100%]" />
+        </div>
+
+        {/* Actual image */}
+        <img
+          src={imageUrl}
+          alt={name}
+          loading="lazy"
+          onLoad={() => setIsLoading(false)}
+          className={`h-24 w-24 object-cover transition-all duration-300 ease-out
+            ${isLoading ? "scale-105 blur-sm" : "scale-100 blur-0"}
+            ${soldOut ? "grayscale" : ""}`}
+        />
+      </div>
       <div className="flex grow flex-col pt-0.5">
         <p className="font-medium">{name}</p>
         <p className="text-sm capitalize italic text-stone-500">
-          {ingredients.join(', ')}
+          {ingredients.join(", ")}
         </p>
         <div className="mt-auto flex items-center justify-between">
           {!soldOut ? (
