@@ -62,7 +62,7 @@ const userSlice = createSlice({
       .addCase(fetchAddress.rejected, (state, action) => {
         state.status = "error";
         state.error =
-          "Location access denied, Please enable GPS or type your address manually to continue";
+          "Location access denied, Please enable GPS manually or type your address manually to continue";
       }),
 });
 
