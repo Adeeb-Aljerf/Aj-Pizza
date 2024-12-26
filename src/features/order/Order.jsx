@@ -36,9 +36,9 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div className="mx-auto mt-7 max-w-3xl space-y-8 rounded-lg bg-white px-4 py-6 shadow-lg">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-4">
-        <h2 className="text-xl font-semibold">Order #{id} status</h2>
+    <div className="mx-auto mt-4 max-w-3xl space-y-4 rounded-lg bg-white px-4 py-3 shadow-lg">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
+        <h2 className="text-lg font-semibold">Order #{id} status</h2>
 
         <div className="space-x-2">
           {priority && (
@@ -52,7 +52,7 @@ function Order() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-l-4 border-stone-200 bg-stone-50 px-6 py-5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-l-4 border-stone-200 bg-stone-50 px-4 py-3">
         <p className="font-medium">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
@@ -63,7 +63,7 @@ function Order() {
         </p>
       </div>
 
-      <ul className="divide-y border-b border-t border-dashed">
+      <ul className="divide-y divide-stone-100 border-b border-t border-dashed">
         {cart.map((item) => (
           <OrderItem
             item={item}
@@ -77,7 +77,7 @@ function Order() {
         ))}
       </ul>
 
-      <div className="space-y-2 rounded-b-lg border-t-2 border-dashed bg-stone-50 px-6 py-5">
+      <div className="space-y-1 rounded-b-lg border-t-2 border-dashed bg-stone-50 px-4 py-3">
         <p className="flex justify-between text-sm font-medium text-stone-600">
           <span>Price pizza:</span>
           <span>{formatCurrency(orderPrice)}</span>
