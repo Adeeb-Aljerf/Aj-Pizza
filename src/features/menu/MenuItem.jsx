@@ -27,7 +27,7 @@ function MenuItem({ pizza }) {
   }
 
   return (
-    <li className="flex cursor-pointer gap-4 rounded-lg p-2 py-2 transition-all duration-200 hover:scale-[1.005] hover:bg-stone-100 hover:shadow-md">
+    <li className="flex cursor-pointer gap-4 rounded-lg p-2 py-2 transition-all duration-200 hover:scale-[1.001] hover:bg-stone-100 hover:shadow-md">
       <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
         {/* Shimmer loading effect */}
         <div
